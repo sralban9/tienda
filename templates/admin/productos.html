@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Administrar productos</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>📦 Productos</h1>
+
+    <nav>
+
+        <a href="{{ url_for('admin_dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('inicio') }}">
+            Tienda
+        </a>
+
+    </nav>
+
+</header>
+
+<main>
+
+    <h2>Administrar productos</h2>
+
+    <p>
+
+        <a
+            class="btn"
+            href="{{ url_for('admin_nuevo_producto') }}"
+        >
+            ➕ Nuevo producto
+        </a>
+
+    </p>
+
+    <br>
+
+    {% for producto in productos %}
+
+    <article>
+
+        <h3>
+            {{ producto['nombre'] }}
+        </h3>
+
+        <p>
+            Precio:
+            ${{ "%.2f"|format(producto['precio']) }}
+        </p>
+
+        <p>
+            Stock:
+            {{ producto['stock'] }}
+        </p>
+
+        <a
+            class="btn"
+            href="{{ url_for(
+                'admin_editar_producto',
+                producto_id=producto['id']
+            ) }}"
+        >
+            ✏️ Editar
+        </a>
+
+        <a
+            class="btn"
+            href="{{ url_for(
+                'admin_eliminar_producto',
+                producto_id=producto['id']
+            ) }}"
+        >
+            🗑️ Eliminar
+        </a>
+
+    </article>
+
+    {% else %}
+
+    <p>
+        No existen productos.
+    </p>
+
+    {% endfor %}
+
+</main>
+
+</body>
+
+</html>

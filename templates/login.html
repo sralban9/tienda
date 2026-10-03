@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Iniciar sesión - Mi Tienda Online</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        /* CONTENEDOR */
+
+        .login-container {
+            width: 100%;
+            max-width: 950px;
+
+            min-height: 570px;
+
+            background: white;
+
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            box-shadow:
+                0 25px 60px rgba(0,0,0,.25);
+        }
+
+        /* PANEL IZQUIERDO */
+
+        .presentacion {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #1d4ed8,
+                    #0891b2
+                );
+
+            color: white;
+
+            padding: 55px 45px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .presentacion::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,.08);
+
+            top: -80px;
+            left: -80px;
+        }
+
+        .presentacion::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,.06);
+
+            bottom: -120px;
+            right: -100px;
+        }
+
+        .logo {
+
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            font-size: 27px;
+            font-weight: bold;
+
+            margin-bottom: 45px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-icon {
+
+            width: 52px;
+            height: 52px;
+
+            border-radius: 15px;
+
+            background: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 28px;
+        }
+
+        .presentacion h1 {
+
+            font-size: 42px;
+
+            line-height: 1.15;
+
+            margin-bottom: 20px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .presentacion p {
+
+            color: #dbeafe;
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .beneficios {
+
+            margin-top: 35px;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 15px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .beneficio {
+
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            font-size: 15px;
+        }
+
+        .beneficio-icono {
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 10px;
+
+            background: rgba(255,255,255,.15);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* LOGIN */
+
+        .login {
+
+            padding: 55px 50px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login h2 {
+
+            font-size: 32px;
+
+            color: #0f172a;
+
+            margin-bottom: 8px;
+        }
+
+        .subtitulo {
+
+            color: #64748b;
+
+            margin-bottom: 35px;
+        }
+
+        /* MENSAJE ERROR */
+
+        .error {
+
+            background: #fee2e2;
+
+            color: #991b1b;
+
+            border: 1px solid #fecaca;
+
+            padding: 13px 15px;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+            font-size: 14px;
+        }
+
+        /* CAMPOS */
+
+        .campo {
+
+            margin-bottom: 20px;
+        }
+
+        .campo label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #334155;
+
+            font-weight: bold;
+
+            font-size: 14px;
+        }
+
+        .input-box {
+
+            position: relative;
+        }
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 18px;
+        }
+
+        .campo input {
+
+            width: 100%;
+
+            padding: 15px 15px 15px 47px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 11px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: .3s;
+
+            background: #f8fafc;
+        }
+
+        .campo input:focus {
+
+            border-color: #2563eb;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px rgba(37,99,235,.10);
+        }
+
+        /* MOSTRAR PASSWORD */
+
+        .mostrar {
+
+            position: absolute;
+
+            right: 13px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 18px;
+        }
+
+        /* RECORDAR */
+
+        .opciones {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin: 5px 0 25px;
+
+            font-size: 14px;
+        }
+
+        .recordar {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #64748b;
+        }
+
+        .recordar input {
+
+            width: 16px;
+            height: 16px;
+        }
+
+        /* BOTÓN */
+
+        .btn-login {
+
+            width: 100%;
+
+            border: none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #0891b2
+                );
+
+            color: white;
+
+            padding: 16px;
+
+            border-radius: 11px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: .3s;
+
+            box-shadow:
+                0 8px 20px rgba(37,99,235,.25);
+        }
+
+        .btn-login:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 25px rgba(37,99,235,.35);
+        }
+
+        /* REGISTRO */
+
+        .registro {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+        .registro a {
+
+            color: #2563eb;
+
+            font-weight: bold;
+
+            text-decoration: none;
+        }
+
+        .registro a:hover {
+
+            text-decoration: underline;
+        }
+
+        /* VOLVER */
+
+        .volver {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 15px;
+
+            color: #64748b;
+
+            text-decoration: none;
+
+            font-size: 14px;
+        }
+
+        .volver:hover {
+
+            color: #2563eb;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+
+            .login-container {
+
+                grid-template-columns: 1fr;
+
+                max-width: 500px;
+            }
+
+            .presentacion {
+
+                padding: 35px;
+
+                text-align: center;
+            }
+
+            .logo {
+
+                justify-content: center;
+
+                margin-bottom: 25px;
+            }
+
+            .presentacion h1 {
+
+                font-size: 32px;
+            }
+
+            .beneficios {
+
+                display: none;
+            }
+
+            .login {
+
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            body {
+
+                padding: 10px;
+            }
+
+            .login-container {
+
+                border-radius: 18px;
+            }
+
+            .presentacion {
+
+                padding: 30px 20px;
+            }
+
+            .login {
+
+                padding: 30px 20px;
+            }
+
+            .presentacion h1 {
+
+                font-size: 28px;
+            }
+
+            .login h2 {
+
+                font-size: 27px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="login-container">
+
+
+    <!-- PANEL PRESENTACIÓN -->
+
+    <section class="presentacion">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🛒
+            </div>
+
+            Mi Tienda Online
+
+        </div>
+
+
+        <h1>
+            Bienvenido de nuevo
+        </h1>
+
+
+        <p>
+            Inicia sesión para acceder a tu cuenta,
+            revisar tus pedidos y disfrutar de una
+            experiencia de compra sencilla y segura.
+        </p>
+
+
+        <div class="beneficios">
+
+            <div class="beneficio">
+
+                <div class="beneficio-icono">
+                    🔒
+                </div>
+
+                <span>
+                    Compra segura
+                </span>
+
+            </div>
+
+
+            <div class="beneficio">
+
+                <div class="beneficio-icono">
+                    🚚
+                </div>
+
+                <span>
+                    Envíos rápidos
+                </span>
+
+            </div>
+
+
+            <div class="beneficio">
+
+                <div class="beneficio-icono">
+                    📦
+                </div>
+
+                <span>
+                    Seguimiento de pedidos
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FORMULARIO -->
+
+    <section class="login">
+
+        <h2>
+            Iniciar sesión
+        </h2>
+
+        <p class="subtitulo">
+            Ingresa tus datos para continuar.
+        </p>
+
+
+        {% if error %}
+
+            <div class="error">
+                ⚠️ {{ error }}
+            </div>
+
+        {% endif %}
+
+
+        <form
+            method="POST"
+            action="{{ url_for('login') }}"
+        >
+
+
+            <!-- EMAIL -->
+
+            <div class="campo">
+
+                <label for="email">
+                    Correo electrónico
+                </label>
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        📧
+                    </span>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="ejemplo@correo.com"
+                        required
+                        autocomplete="email"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="campo">
+
+                <label for="password">
+                    Contraseña
+                </label>
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        🔒
+                    </span>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Ingresa tu contraseña"
+                        required
+                        autocomplete="current-password"
+                    >
+
+                    <button
+                        type="button"
+                        class="mostrar"
+                        onclick="mostrarPassword()"
+                    >
+                        👁️
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- OPCIONES -->
+
+            <div class="opciones">
+
+                <label class="recordar">
+
+                    <input
+                        type="checkbox"
+                        name="recordar"
+                    >
+
+                    Recordarme
+
+                </label>
+
+            </div>
+
+
+            <!-- BOTÓN -->
+
+            <button
+                type="submit"
+                class="btn-login"
+            >
+                🔐 Iniciar sesión
+            </button>
+
+
+        </form>
+
+
+        <!-- REGISTRO -->
+
+        <div class="registro">
+
+            ¿No tienes una cuenta?
+
+            <a href="{{ url_for('registro') }}">
+                Crear cuenta
+            </a>
+
+        </div>
+
+
+        <!-- VOLVER -->
+
+        <a href="/" class="volver">
+            ← Volver a la tienda
+        </a>
+
+    </section>
+
+
+</div>
+
+
+<script>
+
+function mostrarPassword() {
+
+    const password =
+        document.getElementById("password");
+
+    const boton =
+        document.querySelector(".mostrar");
+
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+        boton.textContent = "🙈";
+
+    } else {
+
+        password.type = "password";
+
+        boton.textContent = "👁️";
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>

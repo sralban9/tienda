@@ -1,0 +1,707 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pedido confirmado | Mi Tienda</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        /* TOP BAR */
+        .top-bar {
+            background: #111827;
+            color: white;
+            padding: 9px 0;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        .main-header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: #111827;
+            font-size: 25px;
+            font-weight: 800;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 20px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .header-actions a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .header-actions a:hover {
+            color: #2563eb;
+        }
+
+        /* NAV */
+        .main-nav {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .main-nav .container {
+            display: flex;
+            gap: 30px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #4b5563;
+            padding: 15px 0;
+            font-weight: 600;
+        }
+
+        .main-nav a:hover {
+            color: #2563eb;
+        }
+
+        /* CONTENIDO */
+        .success-container {
+            max-width: 900px;
+            margin: 55px auto;
+            padding: 0 20px;
+        }
+
+        /* CONFIRMACIÓN */
+        .success-card {
+            background: white;
+            border-radius: 22px;
+            padding: 45px;
+            text-align: center;
+
+            box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
+            border: 1px solid #e5e7eb;
+        }
+
+        .success-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 25px;
+
+            background: #dcfce7;
+            color: #16a34a;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 45px;
+            font-weight: bold;
+
+            animation: aparecer 0.5s ease;
+        }
+
+        @keyframes aparecer {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-card h1 {
+            margin: 0 0 12px;
+            font-size: 34px;
+            color: #111827;
+        }
+
+        .success-card > p {
+            color: #6b7280;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        /* PEDIDO */
+        .order-number {
+            display: inline-block;
+
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+
+            border-radius: 12px;
+
+            padding: 12px 20px;
+
+            color: #1d4ed8;
+            font-weight: 700;
+
+            margin-bottom: 30px;
+        }
+
+        /* INFORMACIÓN */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+
+            margin-bottom: 30px;
+        }
+
+        .info-box {
+            background: #f9fafb;
+            border-radius: 14px;
+            padding: 20px;
+
+            border: 1px solid #e5e7eb;
+        }
+
+        .info-icon {
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .info-box span {
+            display: block;
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .info-box strong {
+            color: #111827;
+            font-size: 16px;
+        }
+
+        /* DETALLES */
+        .details {
+            text-align: left;
+
+            border-top: 1px solid #e5e7eb;
+            padding-top: 30px;
+        }
+
+        .details h2 {
+            margin: 0 0 20px;
+            font-size: 21px;
+        }
+
+        .product {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            padding: 15px 0;
+
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .product-image {
+            width: 65px;
+            height: 65px;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+
+            background: #f3f4f6;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-info strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .product-info span {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .product-price {
+            font-weight: 700;
+            color: #111827;
+        }
+
+        /* TOTAL */
+        .total {
+            display: flex;
+            justify-content: space-between;
+
+            padding-top: 22px;
+
+            font-size: 23px;
+            font-weight: 800;
+
+            color: #111827;
+        }
+
+        /* BOTONES */
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+
+            margin-top: 35px;
+        }
+
+        .btn {
+            text-decoration: none;
+
+            padding: 14px 25px;
+
+            border-radius: 11px;
+
+            font-weight: 700;
+
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #374151;
+
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-secondary:hover {
+            background: #f9fafb;
+        }
+
+        /* MENSAJE */
+        .next-message {
+            margin-top: 30px;
+
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+
+            border-radius: 12px;
+
+            padding: 16px;
+
+            color: #166534;
+            font-size: 14px;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #111827;
+            color: white;
+
+            margin-top: 70px;
+            padding: 40px 20px 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+
+            margin-top: 30px;
+            padding-top: 20px;
+
+            text-align: center;
+
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+
+            .header-content {
+                flex-direction: column;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .success-card {
+                padding: 28px 20px;
+            }
+
+            .success-card h1 {
+                font-size: 27px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .product-price {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- BARRA SUPERIOR -->
+    <div class="top-bar">
+        <div class="container">
+            🔒 Gracias por comprar con nosotros
+        </div>
+    </div>
+
+
+    <!-- HEADER -->
+    <header class="main-header">
+
+        <div class="header-content">
+
+            <a href="{{ url_for('inicio') }}" class="logo">
+
+                <span class="logo-icon">
+                    🛒
+                </span>
+
+                Mi Tienda
+
+            </a>
+
+
+            <div class="header-actions">
+
+                {% if usuario %}
+
+                    <span>
+                        Hola, {{ usuario['nombre'] }}
+                    </span>
+
+                    <a href="{{ url_for('pedidos') }}">
+                        📦 Mis pedidos
+                    </a>
+
+                    <a href="{{ url_for('logout') }}">
+                        Salir
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- NAV -->
+    <nav class="main-nav">
+
+        <div class="container">
+
+            <a href="{{ url_for('inicio') }}">
+                Inicio
+            </a>
+
+            <a href="{{ url_for('productos') }}">
+                Productos
+            </a>
+
+            <a href="{{ url_for('pedidos') }}">
+                Mis pedidos
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- CONTENIDO -->
+    <main class="success-container">
+
+        <div class="success-card">
+
+            <!-- ICONO -->
+            <div class="success-icon">
+                ✓
+            </div>
+
+
+            <h1>
+                ¡Pedido confirmado!
+            </h1>
+
+            <p>
+                Tu pedido ha sido registrado correctamente.
+                Gracias por comprar en Mi Tienda.
+            </p>
+
+
+            <!-- NÚMERO -->
+            <div class="order-number">
+
+                📦 Pedido #{{ pedido['id'] }}
+
+            </div>
+
+
+            <!-- INFORMACIÓN -->
+            <div class="info-grid">
+
+                <div class="info-box">
+
+                    <div class="info-icon">
+                        📅
+                    </div>
+
+                    <span>
+                        Fecha
+                    </span>
+
+                    <strong>
+                        {{ pedido['fecha_pedido'] }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-icon">
+                        📋
+                    </div>
+
+                    <span>
+                        Estado
+                    </span>
+
+                    <strong>
+                        {{ pedido['estado']|capitalize }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-icon">
+                        💰
+                    </div>
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong>
+                        ${{ "%.2f"|format(pedido['total']) }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCTOS -->
+            <div class="details">
+
+                <h2>
+                    Detalle de tu pedido
+                </h2>
+
+
+                {% for item in detalles %}
+
+                <div class="product">
+
+                    {% if item['imagen'] %}
+
+                        <img
+                            src="{{ item['imagen'] }}"
+                            alt="{{ item['nombre'] }}"
+                            class="product-image">
+
+                    {% else %}
+
+                        <div class="product-image"></div>
+
+                    {% endif %}
+
+
+                    <div class="product-info">
+
+                        <strong>
+                            {{ item['nombre'] }}
+                        </strong>
+
+                        <span>
+                            Cantidad: {{ item['cantidad'] }}
+                            · ${{ "%.2f"|format(item['precio']) }} c/u
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-price">
+
+                        ${{ "%.2f"|format(
+                            item['precio'] * item['cantidad']
+                        ) }}
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+
+                <!-- TOTAL -->
+                <div class="total">
+
+                    <span>
+                        Total pagado
+                    </span>
+
+                    <span>
+                        ${{ "%.2f"|format(pedido['total']) }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- MENSAJE -->
+            <div class="next-message">
+
+                ✓ Tu pedido está registrado correctamente.
+                Puedes consultar su estado desde
+                <strong>Mis pedidos</strong>.
+
+            </div>
+
+
+            <!-- BOTONES -->
+            <div class="actions">
+
+                <a href="{{ url_for('inicio') }}"
+                   class="btn btn-primary">
+
+                    🛍️ Seguir comprando
+
+                </a>
+
+
+                <a href="{{ url_for('pedidos') }}"
+                   class="btn btn-secondary">
+
+                    📦 Ver mis pedidos
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <strong>
+                🛒 Mi Tienda
+            </strong>
+
+            <p>
+                Tu tienda online de confianza.
+            </p>
+
+
+            <div class="footer-bottom">
+
+                © 2026 Mi Tienda.
+                Todos los derechos reservados.
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>
+```

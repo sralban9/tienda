@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ producto['nombre'] }} - Mi Tienda Online</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #1e293b;
+        }
+
+        /* BARRA SUPERIOR */
+
+        .topbar {
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 9px;
+            font-size: 14px;
+        }
+
+        /* HEADER */
+
+        header {
+            background: white;
+            padding: 18px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 3px 15px rgba(0,0,0,.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: #2563eb;
+            font-size: 25px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg,#2563eb,#06b6d4);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #475569;
+            font-weight: bold;
+            padding: 11px 15px;
+            border-radius: 9px;
+            transition: .3s;
+        }
+
+        nav a:hover {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .logout {
+            background: #ef4444;
+            color: white !important;
+        }
+
+        .logout:hover {
+            background: #dc2626 !important;
+        }
+
+        /* CONTENEDOR */
+
+        .contenedor {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .volver {
+            display: inline-block;
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        /* PRODUCTO */
+
+        .producto {
+            background: white;
+            border-radius: 22px;
+            padding: 35px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            box-shadow: 0 10px 35px rgba(15,23,42,.08);
+        }
+
+        /* IMAGEN */
+
+        .imagen-contenedor {
+            background: #f8fafc;
+            border-radius: 18px;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .imagen-contenedor img {
+            width: 100%;
+            height: 500px;
+            object-fit: contain;
+            transition: .4s;
+        }
+
+        .imagen-contenedor img:hover {
+            transform: scale(1.04);
+        }
+
+        .etiqueta {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #2563eb;
+            color: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* INFORMACIÓN */
+
+        .informacion {
+            padding: 15px 0;
+        }
+
+        .categoria {
+            color: #2563eb;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .informacion h1 {
+            font-size: 42px;
+            line-height: 1.1;
+            color: #0f172a;
+            margin-bottom: 18px;
+        }
+
+        .estrellas {
+            color: #f59e0b;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .descripcion {
+            color: #64748b;
+            line-height: 1.8;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        .precio {
+            font-size: 38px;
+            color: #2563eb;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .stock {
+            display: inline-block;
+            background: #dcfce7;
+            color: #166534;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        /* BOTONES */
+
+        .acciones {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .btn-carrito {
+            flex: 1;
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .btn-carrito:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn-volver {
+            padding: 16px 22px;
+            background: #e2e8f0;
+            color: #334155;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn-volver:hover {
+            background: #cbd5e1;
+        }
+
+        /* BENEFICIOS */
+
+        .beneficios {
+            margin-top: 30px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 25px;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 15px;
+        }
+
+        .beneficio {
+            text-align: center;
+            padding: 15px;
+        }
+
+        .beneficio-icono {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .beneficio strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .beneficio span {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            margin-top: 80px;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer p {
+            color: #94a3b8;
+            margin-top: 8px;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width: 850px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .producto {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .informacion h1 {
+                font-size: 32px;
+            }
+
+            .imagen-contenedor {
+                min-height: 350px;
+            }
+
+            .imagen-contenedor img {
+                height: 350px;
+            }
+        }
+
+        @media(max-width: 550px) {
+
+            .contenedor {
+                margin: 25px auto;
+            }
+
+            .producto {
+                padding: 20px;
+            }
+
+            .beneficios {
+                grid-template-columns: 1fr;
+            }
+
+            .acciones {
+                flex-direction: column;
+            }
+
+            .precio {
+                font-size: 32px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="topbar">
+        🚚 Envíos rápidos · 🔒 Compra segura · 💳 Pagos seguros
+    </div>
+
+
+    <header>
+
+        <a href="/" class="logo">
+
+            <div class="logo-icon">
+                🛒
+            </div>
+
+            Mi Tienda Online
+
+        </a>
+
+
+        <nav>
+
+            <a href="/">
+                🏠 Inicio
+            </a>
+
+            <a href="/carrito">
+                🛒 Carrito
+            </a>
+
+            <a href="/pedidos">
+                📦 Mis pedidos
+            </a>
+
+            {% if session.get("usuario_id") %}
+
+                <a href="/logout" class="logout">
+                    🚪 Salir
+                </a>
+
+            {% else %}
+
+                <a href="/login">
+                    👤 Iniciar sesión
+                </a>
+
+            {% endif %}
+
+        </nav>
+
+    </header>
+
+
+    <main class="contenedor">
+
+        <a href="/" class="volver">
+            ← Volver a productos
+        </a>
+
+
+        <section class="producto">
+
+
+            <!-- IMAGEN -->
+
+            <div class="imagen-contenedor">
+
+                <span class="etiqueta">
+                    ⭐ Producto destacado
+                </span>
+
+                {% if producto['imagen'] %}
+
+                    <img
+                        src="{{ producto['imagen'] }}"
+                        alt="{{ producto['nombre'] }}"
+                    >
+
+                {% else %}
+
+                    <div style="font-size:100px;">
+                        📦
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- INFORMACIÓN -->
+
+            <div class="informacion">
+
+                <div class="categoria">
+                    Producto
+                </div>
+
+
+                <h1>
+                    {{ producto['nombre'] }}
+                </h1>
+
+
+                <div class="estrellas">
+                    ★★★★★
+                    <span style="color:#64748b;font-size:14px;">
+                        5.0
+                    </span>
+                </div>
+
+
+                <p class="descripcion">
+
+                    {{ producto['descripcion'] }}
+
+                </p>
+
+
+                <div class="precio">
+
+                    ${{ "%.2f"|format(producto['precio']) }}
+
+                </div>
+
+
+                {% if producto['stock'] > 0 %}
+
+                    <div class="stock">
+                        ✓ Disponible · {{ producto['stock'] }} unidades
+                    </div>
+
+                {% else %}
+
+                    <div style="
+                        display:inline-block;
+                        background:#fee2e2;
+                        color:#991b1b;
+                        padding:8px 14px;
+                        border-radius:20px;
+                        font-weight:bold;
+                        margin-bottom:25px;
+                    ">
+                        ✕ Producto agotado
+                    </div>
+
+                {% endif %}
+
+
+                {% if producto['stock'] > 0 %}
+
+                    <div class="acciones">
+
+                        <form
+                            action="{{ url_for('agregar_carrito', producto_id=producto['id']) }}"
+                            method="POST"
+                            style="flex:1;"
+                        >
+
+                            <button
+                                type="submit"
+                                class="btn-carrito"
+                            >
+                                🛒 Agregar al carrito
+                            </button>
+
+                        </form>
+
+                        <a href="/" class="btn-volver">
+                            Seguir comprando
+                        </a>
+
+                    </div>
+
+                {% else %}
+
+                    <a href="/" class="btn-volver">
+                        ← Ver otros productos
+                    </a>
+
+                {% endif %}
+
+
+                <!-- BENEFICIOS -->
+
+                <div class="beneficios">
+
+                    <div class="beneficio">
+
+                        <div class="beneficio-icono">
+                            🚚
+                        </div>
+
+                        <strong>Envío rápido</strong>
+
+                        <span>
+                            Entrega segura
+                        </span>
+
+                    </div>
+
+
+                    <div class="beneficio">
+
+                        <div class="beneficio-icono">
+                            🔒
+                        </div>
+
+                        <strong>Compra segura</strong>
+
+                        <span>
+                            Datos protegidos
+                        </span>
+
+                    </div>
+
+
+                    <div class="beneficio">
+
+                        <div class="beneficio-icono">
+                            ↩️
+                        </div>
+
+                        <strong>Garantía</strong>
+
+                        <span>
+                            Compra protegida
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <h3>
+            🛒 Mi Tienda Online
+        </h3>
+
+        <p>
+            Productos de calidad al mejor precio.
+        </p>
+
+        <p>
+            © 2026 Mi Tienda Online
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

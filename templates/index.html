@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Mi Tienda Online - Productos de calidad al mejor precio"
+    >
+
+    <title>Mi Tienda Online | Tecnología y más</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+
+<!-- =========================================
+     BARRA SUPERIOR
+========================================= -->
+
+<div class="top-bar">
+
+    <div class="container top-bar-content">
+
+        <span>
+            🚚 Envíos a todo Ecuador
+        </span>
+
+        <span>
+            🔒 Compra segura
+        </span>
+
+        <span>
+            📞 Atención al cliente
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header class="main-header">
+
+    <div class="container header-content">
+
+
+        <!-- LOGO -->
+
+        <a
+            href="{{ url_for('inicio') }}"
+            class="logo"
+        >
+
+            <span class="logo-icon">
+                🛒
+            </span>
+
+            <span>
+
+                <strong>
+                    Mi Tienda
+                </strong>
+
+                <small>
+                    ONLINE
+                </small>
+
+            </span>
+
+        </a>
+
+
+        <!-- BUSCADOR -->
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="buscador"
+                placeholder="¿Qué estás buscando?"
+                autocomplete="off"
+            >
+
+            <button
+                type="button"
+                onclick="buscarProductos()"
+            >
+                🔍
+            </button>
+
+        </div>
+
+
+        <!-- ACCIONES -->
+
+        <div class="header-actions">
+
+            {% if session.get("usuario_id") %}
+
+                <a
+                    href="{{ url_for('pedidos') }}"
+                    class="header-action"
+                >
+
+                    <span class="action-icon">
+                        📦
+                    </span>
+
+                    <span class="action-text">
+
+                        <small>
+                            Mis
+                        </small>
+
+                        <strong>
+                            Pedidos
+                        </strong>
+
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="{{ url_for('carrito') }}"
+                    class="header-action cart-action"
+                >
+
+                    <span class="action-icon">
+                        🛒
+                    </span>
+
+                    <span class="action-text">
+
+                        <small>
+                            Mi
+                        </small>
+
+                        <strong>
+                            Carrito
+                        </strong>
+
+                    </span>
+
+                    <span class="cart-badge">
+                        🛒
+                    </span>
+
+                </a>
+
+            {% else %}
+
+                <a
+                    href="{{ url_for('login') }}"
+                    class="header-action"
+                >
+
+                    <span class="action-icon">
+                        👤
+                    </span>
+
+                    <span class="action-text">
+
+                        <small>
+                            Hola
+                        </small>
+
+                        <strong>
+                            Iniciar sesión
+                        </strong>
+
+                    </span>
+
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================
+     NAVEGACIÓN
+========================================= -->
+
+<nav class="main-nav">
+
+    <div class="container nav-content">
+
+        <a
+            href="{{ url_for('inicio') }}"
+            class="nav-active"
+        >
+            🏠 Inicio
+        </a>
+
+        <a href="#productos">
+            🛍️ Productos
+        </a>
+
+        <a href="#ofertas">
+            🔥 Ofertas
+        </a>
+
+        <a href="#beneficios">
+            ⭐ Beneficios
+        </a>
+
+        {% if session.get("usuario_rol") == "admin" %}
+
+            <a
+                href="{{ url_for('admin_dashboard') }}"
+                class="admin-link"
+            >
+                ⚙️ Administración
+            </a>
+
+        {% endif %}
+
+        {% if session.get("usuario_id") %}
+
+            <a href="{{ url_for('logout') }}">
+                🚪 Cerrar sesión
+            </a>
+
+        {% else %}
+
+            <a href="{{ url_for('registro') }}">
+                Crear cuenta
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================
+     HERO
+========================================= -->
+
+<main>
+
+<section class="hero">
+
+    <div class="container hero-content">
+
+
+        <div class="hero-text">
+
+            <span class="hero-label">
+                ✨ NUEVA TEMPORADA
+            </span>
+
+            <h1>
+                Tecnología que
+                <span>
+                    transforma
+                </span>
+                tu día
+            </h1>
+
+            <p>
+                Descubre productos seleccionados,
+                excelentes precios y una experiencia
+                de compra sencilla y segura.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a
+                    href="#productos"
+                    class="btn btn-primary"
+                >
+                    🛍️ Comprar ahora
+                </a>
+
+                <a
+                    href="#beneficios"
+                    class="btn btn-secondary"
+                >
+                    Conocer más
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-visual">
+
+            <div class="hero-circle">
+
+                <span>
+                    💻
+                </span>
+
+            </div>
+
+            <div class="floating-card card-one">
+
+                ⚡
+
+                <strong>
+                    Ofertas
+                </strong>
+
+                <small>
+                    Todos los días
+                </small>
+
+            </div>
+
+            <div class="floating-card card-two">
+
+                🚚
+
+                <strong>
+                    Envíos
+                </strong>
+
+                <small>
+                    A todo Ecuador
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     BENEFICIOS
+========================================= -->
+
+<section
+    class="benefits"
+    id="beneficios"
+>
+
+    <div class="container benefits-grid">
+
+
+        <div class="benefit">
+
+            <div class="benefit-icon">
+                🚚
+            </div>
+
+            <div>
+
+                <h3>
+                    Envíos rápidos
+                </h3>
+
+                <p>
+                    Recibe tus productos
+                    donde estés.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="benefit">
+
+            <div class="benefit-icon">
+                🔒
+            </div>
+
+            <div>
+
+                <h3>
+                    Compra segura
+                </h3>
+
+                <p>
+                    Protegemos tus datos
+                    y tu compra.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="benefit">
+
+            <div class="benefit-icon">
+                💳
+            </div>
+
+            <div>
+
+                <h3>
+                    Pago sencillo
+                </h3>
+
+                <p>
+                    Diferentes métodos
+                    de pago.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="benefit">
+
+            <div class="benefit-icon">
+                    ⭐
+            </div>
+
+            <div>
+
+                <h3>
+                    Calidad
+                </h3>
+
+                <p>
+                    Productos seleccionados
+                    para ti.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     TÍTULO PRODUCTOS
+========================================= -->
+
+<section
+    class="products-section"
+    id="productos"
+>
+
+    <div class="container">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="section-label">
+                    NUESTRA TIENDA
+                </span>
+
+                <h2>
+                    Productos destacados
+                </h2>
+
+                <p>
+                    Encuentra lo que necesitas
+                    al mejor precio.
+                </p>
+
+            </div>
+
+            <div class="products-count">
+
+                <strong>
+                    {{ productos|length }}
+                </strong>
+
+                productos
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================
+             PRODUCTOS
+        ================================= -->
+
+        <div
+            class="products-grid"
+            id="lista-productos"
+        >
+
+            {% if productos %}
+
+                {% for producto in productos %}
+
+                <article
+                    class="product-card"
+                    data-producto="{{ producto['nombre']|lower }}"
+                >
+
+
+                    <!-- ETIQUETA -->
+
+                    <div class="product-badge">
+
+                        {% if producto['stock'] > 0 %}
+
+                            Disponible
+
+                        {% else %}
+
+                            Agotado
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- IMAGEN -->
+
+                    <a
+                        href="{{ url_for(
+                            'detalle_producto',
+                            producto_id=producto['id']
+                        ) }}"
+                        class="product-image"
+                    >
+
+                        {% if producto['imagen'] %}
+
+                            <img
+                                src="{{ producto['imagen'] }}"
+                                alt="{{ producto['nombre'] }}"
+                            >
+
+                        {% else %}
+
+                            <div class="no-image">
+                                📦
+                            </div>
+
+                        {% endif %}
+
+                    </a>
+
+
+                    <!-- INFORMACIÓN -->
+
+                    <div class="product-info">
+
+
+                        <span class="product-category">
+                            PRODUCTO
+                        </span>
+
+
+                        <h3>
+
+                            <a
+                                href="{{ url_for(
+                                    'detalle_producto',
+                                    producto_id=producto['id']
+                                ) }}"
+                            >
+
+                                {{ producto['nombre'] }}
+
+                            </a>
+
+                        </h3>
+
+
+                        <p class="product-description">
+
+                            {% if producto['descripcion'] %}
+
+                                {{ producto['descripcion'] }}
+
+                            {% else %}
+
+                                Producto de excelente
+                                calidad.
+
+                            {% endif %}
+
+                        </p>
+
+
+                        <div class="product-bottom">
+
+
+                            <div class="price-box">
+
+                                <span>
+                                    Precio
+                                </span>
+
+                                <strong>
+                                    ${{ "%.2f"|format(
+                                        producto['precio']
+                                    ) }}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="stock">
+
+                                {% if producto['stock'] > 0 %}
+
+                                    ✓ {{ producto['stock'] }}
+                                    disponibles
+
+                                {% else %}
+
+                                    ✕ Agotado
+
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- BOTÓN -->
+
+                        {% if producto['stock'] > 0 %}
+
+                            {% if session.get("usuario_id") %}
+
+                                <form
+                                    method="POST"
+                                    action="{{ url_for(
+                                        'agregar_carrito',
+                                        producto_id=producto['id']
+                                    ) }}"
+                                    class="product-form"
+                                >
+
+                                    <input
+                                        type="number"
+                                        name="cantidad"
+                                        value="1"
+                                        min="1"
+                                        max="{{ producto['stock'] }}"
+                                    >
+
+                                    <button
+                                        type="submit"
+                                        class="btn-buy"
+                                    >
+                                        🛒 Agregar
+                                    </button>
+
+                                </form>
+
+                            {% else %}
+
+                                <a
+                                    href="{{ url_for('login') }}"
+                                    class="btn-buy"
+                                >
+                                    🔐 Iniciar sesión
+                                </a>
+
+                            {% endif %}
+
+                        {% else %}
+
+                            <button
+                                class="btn-disabled"
+                                disabled
+                            >
+                                Producto agotado
+                            </button>
+
+                        {% endif %}
+
+
+                        <a
+                            href="{{ url_for(
+                                'detalle_producto',
+                                producto_id=producto['id']
+                            ) }}"
+                            class="view-product"
+                        >
+                            Ver detalles →
+                        </a>
+
+                    </div>
+
+                </article>
+
+                {% endfor %}
+
+
+            {% else %}
+
+                <div class="empty-products">
+
+                    <span>
+                        📦
+                    </span>
+
+                    <h3>
+                        No hay productos disponibles
+                    </h3>
+
+                    <p>
+                        Pronto agregaremos nuevos productos.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     OFERTAS
+========================================= -->
+
+<section
+    class="offer-section"
+    id="ofertas"
+>
+
+    <div class="container">
+
+        <div class="offer-box">
+
+            <div>
+
+                <span>
+                    🔥 OFERTAS ESPECIALES
+                </span>
+
+                <h2>
+                    Encuentra productos
+                    a excelentes precios
+                </h2>
+
+                <p>
+                    Revisa nuestro catálogo y
+                    encuentra tu próximo producto.
+                </p>
+
+            </div>
+
+            <a
+                href="#productos"
+                class="btn btn-white"
+            >
+                Ver productos
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     CTA
+========================================= -->
+
+<section class="cta-section">
+
+    <div class="container">
+
+        <div class="cta-box">
+
+            <div>
+
+                <span>
+                    ¿TODAVÍA NO TIENES UNA CUENTA?
+                </span>
+
+                <h2>
+                    Compra de manera
+                    rápida y sencilla.
+                </h2>
+
+                <p>
+                    Crea tu cuenta para guardar tus
+                    pedidos y comprar más fácilmente.
+                </p>
+
+            </div>
+
+
+            {% if session.get("usuario_id") %}
+
+                <a
+                    href="{{ url_for('carrito') }}"
+                    class="btn btn-primary"
+                >
+                    🛒 Ir al carrito
+                </a>
+
+            {% else %}
+
+                <a
+                    href="{{ url_for('registro') }}"
+                    class="btn btn-primary"
+                >
+                    Crear mi cuenta
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer>
+
+    <div class="container footer-grid">
+
+
+        <div class="footer-brand">
+
+            <a
+                href="{{ url_for('inicio') }}"
+                class="logo footer-logo"
+            >
+
+                <span class="logo-icon">
+                    🛒
+                </span>
+
+                <span>
+
+                    <strong>
+                        Mi Tienda
+                    </strong>
+
+                    <small>
+                        ONLINE
+                    </small>
+
+                </span>
+
+            </a>
+
+            <p>
+                Tu tienda online para encontrar
+                productos de calidad.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Tienda
+            </h3>
+
+            <a href="#productos">
+                Productos
+            </a>
+
+            <a href="#ofertas">
+                Ofertas
+            </a>
+
+            <a href="#beneficios">
+                Beneficios
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Mi cuenta
+            </h3>
+
+            {% if session.get("usuario_id") %}
+
+                <a href="{{ url_for('pedidos') }}">
+                    Mis pedidos
+                </a>
+
+                <a href="{{ url_for('carrito') }}">
+                    Mi carrito
+                </a>
+
+                <a href="{{ url_for('logout') }}">
+                    Cerrar sesión
+                </a>
+
+            {% else %}
+
+                <a href="{{ url_for('login') }}">
+                    Iniciar sesión
+                </a>
+
+                <a href="{{ url_for('registro') }}">
+                    Crear cuenta
+                </a>
+
+            {% endif %}
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Contacto
+            </h3>
+
+            <p>
+                📞 Atención al cliente
+            </p>
+
+            <p>
+                📧 contacto@mitienda.com
+            </p>
+
+            <p>
+                📍 Ecuador
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <div class="container">
+
+            <p>
+                © 2026 Mi Tienda Online.
+                Todos los derechos reservados.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================
+     JAVASCRIPT BUSCADOR
+========================================= -->
+
+<script>
+
+function buscarProductos() {
+
+    const texto =
+        document
+        .getElementById("buscador")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const productos =
+        document.querySelectorAll(
+            ".product-card"
+        );
+
+    productos.forEach(function(producto) {
+
+        const nombre =
+            producto.dataset.producto;
+
+        if (
+            nombre.includes(texto)
+            || texto === ""
+        ) {
+
+            producto.style.display = "";
+
+        } else {
+
+            producto.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+document
+    .getElementById("buscador")
+    .addEventListener(
+        "keyup",
+        buscarProductos
+    );
+
+</script>
+
+
+</body>
+
+</html>

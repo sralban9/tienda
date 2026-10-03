@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Crear cuenta | Mi Tienda</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='registro.css') }}">
+</head>
+
+<body>
+
+    <div class="registro-container">
+
+        <!-- PANEL IZQUIERDO -->
+        <div class="registro-info">
+
+            <div class="logo">
+                🛒 <span>Mi Tienda</span>
+            </div>
+
+            <h1>Únete a nuestra tienda</h1>
+
+            <p>
+                Crea tu cuenta y disfruta de una experiencia
+                de compra rápida, sencilla y segura.
+            </p>
+
+            <div class="beneficios">
+
+                <div>
+                    <span>✓</span>
+                    Compra nuestros productos
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Guarda tus datos de compra
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Consulta tus pedidos
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Recibe promociones especiales
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FORMULARIO -->
+        <div class="registro-box">
+
+            <div class="registro-header">
+
+                <div class="icono-registro">
+                    👤
+                </div>
+
+                <h2>Crear una cuenta</h2>
+
+                <p>
+                    Completa tus datos para registrarte
+                </p>
+
+            </div>
+
+
+            {% with mensajes = get_flashed_messages() %}
+                {% if mensajes %}
+
+                    <div class="mensaje-error">
+
+                        {% for mensaje in mensajes %}
+                            <p>{{ mensaje }}</p>
+                        {% endfor %}
+
+                    </div>
+
+                {% endif %}
+            {% endwith %}
+
+
+            <form method="POST">
+
+                <!-- NOMBRE -->
+
+                <div class="campo">
+
+                    <label for="nombre">
+                        Nombre completo
+                    </label>
+
+                    <div class="input-box">
+
+                        <span>👤</span>
+
+                        <input
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            placeholder="Tu nombre completo"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="campo">
+
+                    <label for="email">
+                        Correo electrónico
+                    </label>
+
+                    <div class="input-box">
+
+                        <span>📧</span>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="ejemplo@correo.com"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="campo">
+
+                    <label for="password">
+                        Contraseña
+                    </label>
+
+                    <div class="input-box">
+
+                        <span>🔒</span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Crea una contraseña"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="mostrar-password"
+                            onclick="mostrarPassword('password', this)">
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONFIRMAR PASSWORD -->
+
+                <div class="campo">
+
+                    <label for="confirmar_password">
+                        Confirmar contraseña
+                    </label>
+
+                    <div class="input-box">
+
+                        <span>🔐</span>
+
+                        <input
+                            type="password"
+                            id="confirmar_password"
+                            name="confirmar_password"
+                            placeholder="Repite tu contraseña"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="mostrar-password"
+                            onclick="mostrarPassword('confirmar_password', this)">
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TERMINOS -->
+
+                <div class="terminos">
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            required
+                        >
+
+                        <span>
+                            Acepto los términos y condiciones
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- BOTÓN -->
+
+                <button
+                    type="submit"
+                    class="btn-registro">
+
+                    Crear mi cuenta
+
+                </button>
+
+            </form>
+
+
+            <div class="separador">
+                <span>o</span>
+            </div>
+
+
+            <div class="login-link">
+
+                <p>
+                    ¿Ya tienes una cuenta?
+                </p>
+
+                <a href="{{ url_for('login') }}">
+                    Iniciar sesión
+                </a>
+
+            </div>
+
+
+            <div class="volver">
+
+                <a href="/">
+                    ← Volver a la tienda
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function mostrarPassword(id, boton) {
+
+            const campo = document.getElementById(id);
+
+            if (campo.type === "password") {
+
+                campo.type = "text";
+
+                boton.textContent = "🙈";
+
+            } else {
+
+                campo.type = "password";
+
+                boton.textContent = "👁";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

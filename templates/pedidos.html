@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mi Tienda Online</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+        }
+
+        /* BARRA SUPERIOR */
+        .topbar {
+            background: #0f172a;
+            color: white;
+            padding: 9px 40px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        /* CABECERA */
+        .header {
+            background: white;
+            padding: 18px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* LOGO */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #2563eb;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 23px;
+        }
+
+        /* NAVEGACIÓN */
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #475569;
+            font-weight: 600;
+            padding: 11px 15px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .nav a:hover {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        /* USUARIO */
+        .usuario {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 10px;
+            padding: 10px 15px;
+            background: #f1f5f9;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #334155;
+        }
+
+        /* BOTÓN CERRAR SESIÓN */
+        .btn-logout {
+            background: #ef4444 !important;
+            color: white !important;
+        }
+
+        .btn-logout:hover {
+            background: #dc2626 !important;
+            color: white !important;
+        }
+
+        /* CONTENIDO */
+        .contenido {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 25px;
+        }
+
+        .titulo {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .titulo h1 {
+            font-size: 38px;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .titulo p {
+            color: #64748b;
+            font-size: 17px;
+        }
+
+        /* BOTÓN VOLVER */
+        .volver {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            background: white;
+            color: #2563eb;
+            padding: 13px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            transition: 0.3s;
+            margin-bottom: 30px;
+        }
+
+        .volver:hover {
+            background: #2563eb;
+            color: white;
+            transform: translateX(-4px);
+        }
+
+        /* TARJETA */
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 8px 30px rgba(15,23,42,0.08);
+        }
+
+        /* FOOTER */
+        footer {
+            background: #0f172a;
+            color: white;
+            margin-top: 60px;
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        footer h3 {
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #94a3b8;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .usuario {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .topbar {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .nav {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav a {
+                width: 100%;
+                text-align: center;
+            }
+
+            .usuario {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .contenido {
+                padding: 30px 15px;
+            }
+
+            .titulo h1 {
+                font-size: 29px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- BARRA SUPERIOR -->
+    <div class="topbar">
+        🚚 Envíos rápidos · 🔒 Compra segura · 💳 Pagos seguros
+    </div>
+
+    <!-- CABECERA -->
+    <header class="header">
+
+        <!-- LOGO -->
+        <a href="/" class="logo">
+            <div class="logo-icon">🛒</div>
+            <span>Mi Tienda Online</span>
+        </a>
+
+        <!-- NAVEGACIÓN -->
+        <nav class="nav">
+
+            <a href="/">
+                🏠 Inicio
+            </a>
+
+            <a href="/carrito">
+                🛒 Carrito
+            </a>
+
+            <a href="/pedidos">
+                📦 Mis pedidos
+            </a>
+
+            <div class="usuario">
+                👤 {{ session.get('nombre', 'Santiago') }}
+            </div>
+
+            <a href="/logout" class="btn-logout">
+                🚪 Cerrar sesión
+            </a>
+
+        </nav>
+
+    </header>
+
+    <!-- CONTENIDO -->
+    <main class="contenido">
+
+        <a href="/" class="volver">
+            ← Volver a productos
+        </a>
+
+        <div class="titulo">
+            <h1>📦 Mis pedidos</h1>
+            <p>Consulta el estado de tus compras realizadas.</p>
+        </div>
+
+        <div class="card">
+
+            {% if pedidos %}
+
+                {% for pedido in pedidos %}
+
+                    <div style="
+                        padding:20px;
+                        border:1px solid #e2e8f0;
+                        border-radius:14px;
+                        margin-bottom:15px;
+                    ">
+
+                        <h3>
+                            Pedido #{{ pedido['id'] }}
+                        </h3>
+
+                        <p>
+                            📅 {{ pedido['fecha'] }}
+                        </p>
+
+                        <p>
+                            Estado:
+                            <strong>{{ pedido['estado'] }}</strong>
+                        </p>
+
+                        <p>
+                            💰 Total:
+                            <strong>${{ "%.2f"|format(pedido['total']) }}</strong>
+                        </p>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div style="text-align:center; padding:50px;">
+
+                    <div style="font-size:60px;">
+                        🛍️
+                    </div>
+
+                    <h2>No tienes pedidos todavía</h2>
+
+                    <p style="color:#64748b; margin:15px 0;">
+                        Explora nuestros productos y realiza tu primera compra.
+                    </p>
+
+                    <a href="/" style="
+                        display:inline-block;
+                        background:#2563eb;
+                        color:white;
+                        padding:13px 25px;
+                        border-radius:10px;
+                        text-decoration:none;
+                        font-weight:bold;
+                    ">
+                        🛒 Ver productos
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+
+        <h3>🛒 Mi Tienda Online</h3>
+
+        <p>
+            Tu tienda online de confianza
+        </p>
+
+        <p style="margin-top:10px;">
+            © 2026 Mi Tienda Online. Todos los derechos reservados.
+        </p>
+
+    </footer>
+
+</body>
+</html>

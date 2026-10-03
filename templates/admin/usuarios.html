@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Usuarios</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>👥 Usuarios</h1>
+
+    <nav>
+
+        <a href="{{ url_for('admin_dashboard') }}">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('inicio') }}">
+            Tienda
+        </a>
+
+    </nav>
+
+</header>
+
+<main>
+
+    <h2>Usuarios registrados</h2>
+
+    {% for usuario in usuarios %}
+
+    <article>
+
+        <h3>
+            👤 {{ usuario['nombre'] }}
+        </h3>
+
+        <p>
+            📧 {{ usuario['email'] }}
+        </p>
+
+        <p>
+            🔐 Rol:
+            {{ usuario['rol'] }}
+        </p>
+
+        <p>
+            📅 Registro:
+            {{ usuario['fecha_registro'] }}
+        </p>
+
+    </article>
+
+    {% else %}
+
+    <p>
+        No existen usuarios registrados.
+    </p>
+
+    {% endfor %}
+
+</main>
+
+</body>
+
+</html>

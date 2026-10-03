@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Panel de administración</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>⚙️ Panel de Administración</h1>
+
+    <nav>
+
+        <a href="{{ url_for('inicio') }}">
+            🏠 Tienda
+        </a>
+
+        <a href="{{ url_for('admin_productos') }}">
+            📦 Productos
+        </a>
+
+        <a href="{{ url_for('admin_usuarios') }}">
+            👥 Usuarios
+        </a>
+
+        <a href="{{ url_for('admin_pedidos') }}">
+            🛒 Pedidos
+        </a>
+
+        <a href="{{ url_for('logout') }}">
+            🚪 Salir
+        </a>
+
+    </nav>
+
+</header>
+
+<main>
+
+    <h2>📊 Dashboard</h2>
+
+    <section class="admin-grid">
+
+        <div class="admin-card">
+
+            <h3>📦 Productos</h3>
+
+            <p>
+                {{ productos|length }}
+            </p>
+
+            <a
+                class="btn"
+                href="{{ url_for('admin_productos') }}"
+            >
+                Administrar
+            </a>
+
+        </div>
+
+
+        <div class="admin-card">
+
+            <h3>👥 Usuarios</h3>
+
+            <p>
+                {{ usuarios|length }}
+            </p>
+
+            <a
+                class="btn"
+                href="{{ url_for('admin_usuarios') }}"
+            >
+                Administrar
+            </a>
+
+        </div>
+
+
+        <div class="admin-card">
+
+            <h3>🛒 Pedidos</h3>
+
+            <p>
+                {{ pedidos|length }}
+            </p>
+
+            <a
+                class="btn"
+                href="{{ url_for('admin_pedidos') }}"
+            >
+                Administrar
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+
+    <p>
+        Panel administrativo - 2026
+    </p>
+
+</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,658 @@
+/* =========================================
+   REGISTRO - DISEÑO PROFESIONAL
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f172a,
+            #1e3a8a,
+            #2563eb
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px;
+}
+
+
+/* =========================================
+   CONTENEDOR
+========================================= */
+
+.registro-container {
+
+    width: 100%;
+
+    max-width: 1050px;
+
+    min-height: 680px;
+
+    background: white;
+
+    border-radius: 24px;
+
+    overflow: hidden;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.30);
+}
+
+
+/* =========================================
+   PANEL IZQUIERDO
+========================================= */
+
+.registro-info {
+
+    padding: 60px;
+
+    color: white;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1d4ed8,
+            #2563eb,
+            #3b82f6
+        );
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.registro-info::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 320px;
+
+    height: 320px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.08);
+
+    top: -120px;
+
+    right: -100px;
+}
+
+
+.registro-info::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 250px;
+
+    height: 250px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.06);
+
+    bottom: -100px;
+
+    left: -80px;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.logo {
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    margin-bottom: 65px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.logo span {
+
+    margin-left: 8px;
+}
+
+
+/* =========================================
+   TEXTO
+========================================= */
+
+.registro-info h1 {
+
+    font-size: 40px;
+
+    line-height: 1.15;
+
+    margin-bottom: 20px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.registro-info > p {
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    max-width: 420px;
+
+    color: #dbeafe;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =========================================
+   BENEFICIOS
+========================================= */
+
+.beneficios {
+
+    margin-top: 40px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.beneficios div {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    font-size: 15px;
+}
+
+
+.beneficios span {
+
+    width: 28px;
+
+    height: 28px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.15);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   CAJA REGISTRO
+========================================= */
+
+.registro-box {
+
+    padding: 45px 60px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+/* =========================================
+   CABECERA
+========================================= */
+
+.registro-header {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+
+.icono-registro {
+
+    width: 58px;
+
+    height: 58px;
+
+    margin: 0 auto 13px;
+
+    border-radius: 16px;
+
+    background: #eff6ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 27px;
+}
+
+
+.registro-header h2 {
+
+    font-size: 29px;
+
+    color: #111827;
+
+    margin-bottom: 7px;
+}
+
+
+.registro-header p {
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   CAMPOS
+========================================= */
+
+.campo {
+
+    margin-bottom: 16px;
+}
+
+
+.campo label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #374151;
+}
+
+
+.input-box {
+
+    height: 48px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 14px;
+
+    background: white;
+
+    transition: 0.25s;
+}
+
+
+.input-box:focus-within {
+
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 4px rgba(37, 99, 235, 0.10);
+}
+
+
+.input-box > span {
+
+    font-size: 17px;
+
+    margin-right: 10px;
+}
+
+
+.input-box input {
+
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    font-size: 14px;
+
+    color: #111827;
+}
+
+
+.input-box input::placeholder {
+
+    color: #9ca3af;
+}
+
+
+/* =========================================
+   MOSTRAR CONTRASEÑA
+========================================= */
+
+.mostrar-password {
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 17px;
+
+    padding: 5px;
+}
+
+
+/* =========================================
+   TÉRMINOS
+========================================= */
+
+.terminos {
+
+    margin: 5px 0 20px;
+
+    font-size: 13px;
+
+    color: #6b7280;
+}
+
+
+.terminos label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    cursor: pointer;
+}
+
+
+.terminos input {
+
+    width: 16px;
+
+    height: 16px;
+
+    accent-color: #2563eb;
+}
+
+
+/* =========================================
+   BOTÓN REGISTRO
+========================================= */
+
+.btn-registro {
+
+    width: 100%;
+
+    height: 50px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+
+    box-shadow:
+        0 8px 20px rgba(37,99,235,0.25);
+}
+
+
+.btn-registro:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(37,99,235,0.35);
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+.mensaje-error {
+
+    background: #fef2f2;
+
+    border: 1px solid #fecaca;
+
+    color: #b91c1c;
+
+    border-radius: 10px;
+
+    padding: 10px 14px;
+
+    margin-bottom: 18px;
+
+    font-size: 13px;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   SEPARADOR
+========================================= */
+
+.separador {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 20px 0;
+
+    color: #9ca3af;
+
+    font-size: 13px;
+}
+
+
+.separador::before,
+.separador::after {
+
+    content: "";
+
+    height: 1px;
+
+    background: #e5e7eb;
+
+    flex: 1;
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+.login-link {
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+.login-link p {
+
+    display: inline;
+
+    color: #6b7280;
+}
+
+
+.login-link a {
+
+    color: #2563eb;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    margin-left: 5px;
+}
+
+
+.login-link a:hover {
+
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   VOLVER
+========================================= */
+
+.volver {
+
+    text-align: center;
+
+    margin-top: 20px;
+}
+
+
+.volver a {
+
+    color: #6b7280;
+
+    text-decoration: none;
+
+    font-size: 13px;
+}
+
+
+.volver a:hover {
+
+    color: #2563eb;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 850px) {
+
+    .registro-container {
+
+        grid-template-columns: 1fr;
+
+        max-width: 520px;
+    }
+
+    .registro-info {
+
+        display: none;
+    }
+
+    .registro-box {
+
+        padding: 40px 35px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    body {
+
+        padding: 15px;
+    }
+
+    .registro-container {
+
+        border-radius: 18px;
+    }
+
+    .registro-box {
+
+        padding: 30px 22px;
+    }
+
+    .registro-header h2 {
+
+        font-size: 25px;
+    }
+}

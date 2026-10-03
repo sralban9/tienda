@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mi Tienda Online</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+        }
+
+        .header {
+            background: #2563eb;
+            color: white;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .menu {
+            display: flex;
+            gap: 10px;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            background: rgba(255,255,255,0.15);
+            padding: 12px 18px;
+            border-radius: 8px;
+        }
+
+        .menu a:hover {
+            background: white;
+            color: #2563eb;
+        }
+
+        .usuario {
+            background: #0f172a;
+            padding: 12px 18px;
+            border-radius: 8px;
+        }
+
+        .contenido {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .titulo {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.08);
+        }
+
+        h1 {
+            color: #0f172a;
+        }
+
+        .volver {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .pedido {
+            background: white;
+            margin-top: 20px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.06);
+        }
+
+        .estado {
+            display: inline-block;
+            background: #dcfce7;
+            color: #166534;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .vacio {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            background: #2563eb;
+            color: white;
+            padding: 13px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        footer {
+            margin-top: 80px;
+            background: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 35px;
+        }
+
+        @media(max-width: 800px) {
+
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+
+        <div class="logo">
+            🛒 Mi Tienda Online
+        </div>
+
+        <nav class="menu">
+
+            <a href="/">
+                🏠 Inicio
+            </a>
+
+            <a href="/carrito">
+                🛒 Carrito
+            </a>
+
+            <a href="/pedidos">
+                📦 Mis pedidos
+            </a>
+
+            <span class="usuario">
+                👤 {{ session.get("nombre", "Santiago") }}
+            </span>
+
+            <a href="/logout">
+                🚪 Cerrar sesión
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <main class="contenido">
+
+        <a href="/" class="volver">
+            ← Volver a productos
+        </a>
+
+        <div class="titulo">
+
+            <h1>📦 Mis pedidos</h1>
+
+            <p>
+                Aquí puedes consultar todas tus compras.
+            </p>
+
+        </div>
+
+
+        {% if pedidos %}
+
+            {% for pedido in pedidos %}
+
+                <div class="pedido">
+
+                    <h2>
+                        Pedido #{{ pedido["id"] }}
+                    </h2>
+
+                    <p>
+                        📅 Fecha:
+                        {{ pedido["fecha"] }}
+                    </p>
+
+                    <p>
+                        💰 Total:
+                        <strong>
+                            ${{ "%.2f"|format(pedido["total"]) }}
+                        </strong>
+                    </p>
+
+                    <p>
+                        Estado:
+                        <span class="estado">
+                            {{ pedido["estado"] }}
+                        </span>
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="pedido vacio">
+
+                <div style="font-size:60px;">
+                    🛍️
+                </div>
+
+                <h2>
+                    Todavía no tienes pedidos
+                </h2>
+
+                <p>
+                    Explora nuestra tienda y realiza tu primera compra.
+                </p>
+
+                <a href="/" class="btn">
+                    🛒 Ver productos
+                </a>
+
+            </div>
+
+        {% endif %}
+
+    </main>
+
+
+    <footer>
+
+        <h3>🛒 Mi Tienda Online</h3>
+
+        <p>
+            Tu tienda online de confianza
+        </p>
+
+        <p>
+            © 2026 Mi Tienda Online
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

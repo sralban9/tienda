@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% if producto %}
+            Editar producto
+        {% else %}
+            Nuevo producto
+        {% endif %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>📦 Producto</h1>
+
+</header>
+
+<main>
+
+<form method="POST">
+
+    <label>
+        Nombre
+    </label>
+
+    <input
+        type="text"
+        name="nombre"
+        required
+        value="{{ producto['nombre'] if producto else '' }}"
+    >
+
+
+    <label>
+        Descripción
+    </label>
+
+    <textarea
+        name="descripcion"
+        rows="5"
+    >{{ producto['descripcion'] if producto else '' }}</textarea>
+
+
+    <label>
+        Precio
+    </label>
+
+    <input
+        type="number"
+        name="precio"
+        step="0.01"
+        min="0"
+        required
+        value="{{ producto['precio'] if producto else '' }}"
+    >
+
+
+    <label>
+        Stock
+    </label>
+
+    <input
+        type="number"
+        name="stock"
+        min="0"
+        required
+        value="{{ producto['stock'] if producto else '' }}"
+    >
+
+
+    <label>
+        URL de imagen
+    </label>
+
+    <input
+        type="text"
+        name="imagen"
+        value="{{ producto['imagen'] if producto else '' }}"
+    >
+
+
+    <button type="submit">
+
+        💾 Guardar producto
+
+    </button>
+
+</form>
+
+<p style="text-align:center;">
+
+    <a href="{{ url_for('admin_productos') }}">
+        ← Volver
+    </a>
+
+</p>
+
+</main>
+
+</body>
+
+</html>

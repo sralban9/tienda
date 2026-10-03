@@ -1,0 +1,738 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Finalizar compra | Mi Tienda</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        /* TOP BAR */
+        .top-bar {
+            background: #111827;
+            color: white;
+            padding: 9px 0;
+            font-size: 14px;
+        }
+
+        .top-bar .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        .main-header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: #111827;
+            font-size: 25px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-actions a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        /* NAV */
+        .main-nav {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .main-nav .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 28px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #4b5563;
+            padding: 15px 0;
+            font-weight: 600;
+        }
+
+        .main-nav a:hover {
+            color: #2563eb;
+        }
+
+        /* CONTENIDO */
+        .checkout-container {
+            max-width: 1200px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        .checkout-title {
+            margin-bottom: 30px;
+        }
+
+        .checkout-title h1 {
+            margin: 0 0 8px;
+            font-size: 34px;
+            color: #111827;
+        }
+
+        .checkout-title p {
+            margin: 0;
+            color: #6b7280;
+        }
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1fr 390px;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* TARJETAS */
+        .checkout-card {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.07);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 25px;
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .card-number {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .card-title h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        /* USUARIO */
+        .user-box {
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+            border-radius: 14px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .user-box strong {
+            display: block;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+
+        .user-box span {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* METODO DE PAGO */
+        .payment-option {
+            border: 2px solid #2563eb;
+            background: #eff6ff;
+            border-radius: 14px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .payment-icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+        }
+
+        .payment-option strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .payment-option span {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* SEGURIDAD */
+        .security-box {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 16px;
+            background: #f9fafb;
+            border-radius: 12px;
+            margin-top: 20px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* RESUMEN */
+        .summary-card {
+            position: sticky;
+            top: 25px;
+        }
+
+        .summary-card h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 22px;
+        }
+
+        .cart-items {
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 14px;
+            padding: 15px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .cart-item-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            object-fit: cover;
+            background: #f3f4f6;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-info h3 {
+            margin: 0 0 6px;
+            font-size: 15px;
+        }
+
+        .cart-item-info p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .cart-item-price {
+            font-weight: 700;
+            color: #111827;
+            white-space: nowrap;
+        }
+
+        /* TOTALES */
+        .totals {
+            margin-top: 20px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 13px 0;
+            color: #6b7280;
+        }
+
+        .total-row.final {
+            border-top: 1px solid #e5e7eb;
+            padding-top: 20px;
+            margin-top: 20px;
+            color: #111827;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        /* BOTÓN */
+        .btn-confirmar {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.2s;
+        }
+
+        .btn-confirmar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .back-cart {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* BENEFICIOS */
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .benefit {
+            text-align: center;
+            padding: 15px 8px;
+            background: #f9fafb;
+            border-radius: 12px;
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .benefit-icon {
+            display: block;
+            font-size: 22px;
+            margin-bottom: 7px;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #111827;
+            color: white;
+            margin-top: 70px;
+            padding: 40px 20px 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            margin-top: 30px;
+            padding-top: 20px;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 850px) {
+
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-card {
+                position: static;
+            }
+
+            .header-content {
+                flex-direction: column;
+            }
+
+            .main-nav .container {
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .checkout-container {
+                margin-top: 25px;
+            }
+
+            .checkout-title h1 {
+                font-size: 27px;
+            }
+
+            .checkout-card {
+                padding: 20px;
+            }
+
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- BARRA SUPERIOR -->
+    <div class="top-bar">
+        <div class="container">
+            🔒 Compra segura y protegida
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="main-header">
+        <div class="header-content">
+
+            <a href="{{ url_for('inicio') }}" class="logo">
+                <span class="logo-icon">🛒</span>
+                Mi Tienda
+            </a>
+
+            <div class="header-actions">
+
+                {% if usuario %}
+                    <span>Hola, {{ usuario['nombre'] }}</span>
+
+                    <a href="{{ url_for('carrito') }}">
+                        🛒 Carrito
+                    </a>
+
+                    <a href="{{ url_for('logout') }}">
+                        Salir
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('login') }}">
+                        Iniciar sesión
+                    </a>
+
+                    <a href="{{ url_for('registro') }}">
+                        Crear cuenta
+                    </a>
+                {% endif %}
+
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVEGACIÓN -->
+    <nav class="main-nav">
+        <div class="container">
+            <a href="{{ url_for('inicio') }}">Inicio</a>
+            <a href="{{ url_for('productos') }}">Productos</a>
+            <a href="{{ url_for('carrito') }}">Carrito</a>
+        </div>
+    </nav>
+
+
+    <!-- CONTENIDO -->
+    <main class="checkout-container">
+
+        <div class="checkout-title">
+            <h1>Finalizar compra</h1>
+            <p>Revisa tu pedido antes de confirmar la compra.</p>
+        </div>
+
+
+        <div class="checkout-grid">
+
+            <!-- COLUMNA IZQUIERDA -->
+            <section>
+
+                <!-- USUARIO -->
+                <div class="checkout-card">
+
+                    <div class="card-title">
+                        <div class="card-number">1</div>
+                        <h2>Información de cliente</h2>
+                    </div>
+
+                    {% if usuario %}
+
+                    <div class="user-box">
+
+                        <div class="user-icon">
+                            👤
+                        </div>
+
+                        <div>
+                            <strong>{{ usuario['nombre'] }}</strong>
+                            <span>{{ usuario['email'] }}</span>
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- PAGO -->
+                <div class="checkout-card">
+
+                    <div class="card-title">
+                        <div class="card-number">2</div>
+                        <h2>Método de pago</h2>
+                    </div>
+
+                    <div class="payment-option">
+
+                        <div class="payment-icon">
+                            💳
+                        </div>
+
+                        <div>
+                            <strong>Pago al confirmar pedido</strong>
+                            <span>
+                                Tu pedido será registrado como pendiente.
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="security-box">
+                        🔒
+                        <span>
+                            Tus datos están protegidos. En esta versión
+                            puedes integrar posteriormente una pasarela
+                            como PayPal, Stripe o Mercado Pago.
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <!-- BENEFICIOS -->
+                <div class="checkout-card">
+
+                    <div class="card-title">
+                        <div class="card-number">3</div>
+                        <h2>Beneficios de tu compra</h2>
+                    </div>
+
+                    <div class="benefits">
+
+                        <div class="benefit">
+                            <span class="benefit-icon">🔒</span>
+                            Compra segura
+                        </div>
+
+                        <div class="benefit">
+                            <span class="benefit-icon">📦</span>
+                            Pedido registrado
+                        </div>
+
+                        <div class="benefit">
+                            <span class="benefit-icon">📞</span>
+                            Atención al cliente
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- RESUMEN DEL PEDIDO -->
+            <aside>
+
+                <div class="checkout-card summary-card">
+
+                    <h2>Resumen del pedido</h2>
+
+                    <div class="cart-items">
+
+                        {% for item in carrito %}
+
+                        <div class="cart-item">
+
+                            {% if item['imagen'] %}
+                                <img
+                                    src="{{ item['imagen'] }}"
+                                    alt="{{ item['nombre'] }}"
+                                    class="cart-item-image">
+                            {% else %}
+                                <div class="cart-item-image"></div>
+                            {% endif %}
+
+                            <div class="cart-item-info">
+
+                                <h3>
+                                    {{ item['nombre'] }}
+                                </h3>
+
+                                <p>
+                                    Cantidad: {{ item['cantidad'] }}
+                                </p>
+
+                                <p>
+                                    ${{ "%.2f"|format(item['precio']) }}
+                                    c/u
+                                </p>
+
+                            </div>
+
+                            <div class="cart-item-price">
+
+                                ${{ "%.2f"|format(
+                                    item['precio'] * item['cantidad']
+                                ) }}
+
+                            </div>
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+
+                    <!-- TOTALES -->
+                    <div class="totals">
+
+                        <div class="total-row">
+                            <span>Subtotal</span>
+                            <span>
+                                ${{ "%.2f"|format(total) }}
+                            </span>
+                        </div>
+
+                        <div class="total-row">
+                            <span>Envío</span>
+                            <span>Gratis</span>
+                        </div>
+
+                        <div class="total-row final">
+                            <span>Total</span>
+                            <span>
+                                ${{ "%.2f"|format(total) }}
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONFIRMAR -->
+                    <form method="POST"
+                          action="{{ url_for('checkout') }}">
+
+                        <button type="submit"
+                                class="btn-confirmar">
+
+                            ✓ Confirmar pedido
+
+                        </button>
+
+                    </form>
+
+
+                    <a href="{{ url_for('carrito') }}"
+                       class="back-cart">
+
+                        ← Volver al carrito
+
+                    </a>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <strong>🛒 Mi Tienda</strong>
+
+            <p>
+                Tu tienda online de confianza.
+            </p>
+
+            <div class="footer-bottom">
+                © 2026 Mi Tienda. Todos los derechos reservados.
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>
+```
